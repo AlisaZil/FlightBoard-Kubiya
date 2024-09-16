@@ -1,1 +1,29 @@
-<p>flight-line works!</p>
+
+<div class="flight-container" *ngIf="flightData">
+
+    <p class="airline-name">{{flightData.airlineName}}</p>
+    <p class="flight-number">{{flightData.airlineNumber}}</p>
+
+    <div class="flight-time-section">
+        <p class="takeoff-time">{{flightData.takeOffTime}}</p>
+        <img class="airplane-icon" src="../../assets/icons/airplane.svg" alt="airplane-icon">
+        <p class="landing-time">{{flightData.landingTime}}</p>
+    </div>
+
+    <div class="airport-section">
+
+        <div class="airport-box">
+            <p class="airport-name" >{{flightData.takeofAirport}}</p>
+            <img src="../../assets/icons/departure.svg" alt="departure-icon">
+        </div>
+
+        <div class="airport-box">
+            <p class="airport-name" >{{flightData.landingAirport}}</p>
+            <img src="../../assets/icons/landing.svg" alt="landing-icon">
+        </div>
+
+    </div>
+
+    <p class="status-name">{{flightData.status}}</p>
+
+</div>

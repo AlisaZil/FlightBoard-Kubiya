@@ -3,10 +3,18 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { FlightLineComponent } from './flight-line/flight-line.component';
+import { FlightBoardComponent } from './flight-board/flight-board.component';
+import { SearchBarComponent } from './search-bar/search-bar.component';
+import { CreateFlightFormComponent } from './create-flight-form/create-flight-form.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    FlightLineComponent,
+    FlightBoardComponent,
+    SearchBarComponent,
+    CreateFlightFormComponent
   ],
   imports: [
     BrowserModule,

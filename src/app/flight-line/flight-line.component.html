@@ -1,3 +1,29 @@
-<div class="flight-container">
-    
+
+<div class="flight-container" *ngIf="flightData">
+
+    <p class="airline-name">{{flightData.airlineName}}</p>
+    <p class="flight-number">{{flightData.airlineNumber}}</p>
+
+    <div class="flight-time-section">
+        <p class="takeoff-time">{{flightData.takeOffTime}}</p>
+        <img src="" alt="">
+        <p class="landing-time">{{flightData.landingTime}}</p>
+    </div>
+
+    <div class="airport-section">
+
+        <div class="airport-box">
+            <p>{{flightData.takeofAirport}}</p>
+            <img src="" alt="">
+        </div>
+
+        <div class="airport-box">
+            <p>{{flightData.landingAirport}}</p>
+            <img src="" alt="">
+        </div>
+
+    </div>
+
+    <p class="status-name">{{flightData.status}}</p>
+
 </div>

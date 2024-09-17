@@ -1,12 +1,33 @@
 <div class="search-bar-container">
     <div class="flight-number-search">
         <mat-form-field class="example-full-width">
-            <input matInput placeholder="Flight Number">
+            <input matInput placeholder="Flight Number" (input)="handleFlightNumberInput()" [(ngModel)]="flightNumberInput">
         </mat-form-field>
     </div>
 
     <div class="dropdown-section">
-        <div class="dropdown"></div>
-        <div class="dropdown"></div>
+
+        <form>
+
+            <mat-form-field >
+                <input type="text"  matInput [formControl]="takeOffAirport" [matAutocomplete]="auto">
+                <mat-autocomplete #auto="matAutocomplete">
+                    <mat-option *ngFor="let option of filterdTakingOffAirportList | async" [value]="option">
+                        {{option}}
+                    </mat-option>
+                </mat-autocomplete>
+            </mat-form-field>
+
+            <mat-form-field>
+                <input type="text" matInput [formControl]="landingAirport" [matAutocomplete]="auto">
+                <mat-autocomplete #auto="matAutocomplete">
+                    <mat-option *ngFor="let option of filterdLandingAirportList | async" [value]="option">
+                        {{option}}
+                    </mat-option>
+                </mat-autocomplete>
+            </mat-form-field>
+
+        </form>
+
     </div>
 </div>

@@ -12,7 +12,7 @@ export class SearchBarComponent {
   public flightNumberInput: String = "";
   
    public landingAirportList: string[] = ["BEN-GORION", "LONDON-AIR", "FRANCE-PARIS"];
-  public takingOffAirportList: string[] = ["BEN-GORION", "LONDON-AIR", "FRANCE-PARIS"];
+  public takingOffAirportList: string[] = ["BEN-GORION", "LONDON-AIR", "FRANCE-PARIS" , "FRANCE-PARIS"];
 
   filterdLandingAirportList!: Observable<string[]>;
   filterdTakingOffAirportList!: Observable<string[]>;
@@ -27,12 +27,11 @@ export class SearchBarComponent {
   constructor() { }
 
   ngOnInit() {
-    // Assign the filtered list by calling filterList and assigning it to the variable
+
     this.filterdLandingAirportList = this.filterList(this.landingAirportList, this.landingAirport);
     this.filterdTakingOffAirportList = this.filterList(this.takingOffAirportList, this.takeOffAirport);
   }
 
-  // The method should return an Observable
   filterList(list: string[], control: FormControl): Observable<string[]> {
     return control.valueChanges.pipe(
       startWith(''),

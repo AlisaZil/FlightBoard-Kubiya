@@ -9,6 +9,14 @@ import { SearchBarComponent } from './search-bar/search-bar.component';
 import { CreateFlightFormComponent } from './create-flight-form/create-flight-form.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
+import {FormControl, FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {MatAutocompleteModule} from '@angular/material/autocomplete';
+import {MatInputModule} from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import {AsyncPipe} from '@angular/common';
+
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -20,7 +28,13 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    FormsModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatAutocompleteModule,
+    ReactiveFormsModule,
+    AsyncPipe
   ],
   providers: [],
   bootstrap: [AppComponent]

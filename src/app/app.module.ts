@@ -7,6 +7,7 @@ import { FlightLineComponent } from './flight-line/flight-line.component';
 import { FlightBoardComponent } from './flight-board/flight-board.component';
 import { SearchBarComponent } from './search-bar/search-bar.component';
 import { CreateFlightFormComponent } from './create-flight-form/create-flight-form.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { CreateFlightFormComponent } from './create-flight-form/create-flight-fo
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    BrowserAnimationsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

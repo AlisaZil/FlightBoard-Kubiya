@@ -13,3 +13,10 @@ html{
 }
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.toast-container {
+    position: fixed;
+    top: 50%;
+    left: 63%;
+    transform: translate(-50%, -50%);
+}

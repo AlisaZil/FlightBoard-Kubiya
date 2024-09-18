@@ -38,7 +38,7 @@ export class FlightsService {
       'Content-Type': 'application/json'
     });
     
-    return this.http.post<Flight>(this.flightsUrl, JSON.stringify(flight), { headers });
+    return this.http.post<Flight>(this.flightsUrl, JSON.stringify(flight), {headers});
   }
 
   //PUT

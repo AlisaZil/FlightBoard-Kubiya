@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnDestroy, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnDestroy, Output } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, FormGroupDirective, NgForm, Validators } from '@angular/forms';
 import { ErrorStateMatcher } from '@angular/material/core';
 import { FlightsService } from '../flights.service';
@@ -23,10 +23,10 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
 export class FlightBoardComponent implements OnDestroy{
   
   @Output() sendAction = new EventEmitter<string>();
+  @Input() formAction: 'Edit' | 'Create' = 'Create';
   
   private destroy$: Subject<void> = new Subject<void>();
   
-  public formAction: 'Edit' | 'Create' = 'Edit';
 
   public flightFormControl?: FormGroup;
   public flightFormFields: { key: string, type:string, options?: string[] }[] = [

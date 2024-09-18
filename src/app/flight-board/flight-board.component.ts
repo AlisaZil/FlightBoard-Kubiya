@@ -1,8 +1,10 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, OnDestroy, Output } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, FormGroupDirective, NgForm, Validators } from '@angular/forms';
 import { ErrorStateMatcher } from '@angular/material/core';
 import { FlightsService } from '../flights.service';
 import { Flight } from '../interfaces';
+import { Subject, takeUntil } from 'rxjs';
+import { ToastrService } from 'ngx-toastr'
 
 
 export class MyErrorStateMatcher implements ErrorStateMatcher {
@@ -18,10 +20,12 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
   styleUrls: ['./flight-board.component.scss']
 })
   
-export class FlightBoardComponent {
-
+export class FlightBoardComponent implements OnDestroy{
+  
   @Output() sendAction = new EventEmitter<string>();
 
+  private destroy$: Subject<void> = new Subject<void>();
+  
   public flightFormControl?: FormGroup;
   public flightFormFields: { key: string, type:string, options?: string[] }[] = [
     { key: 'flightNumber', type:'number'},
@@ -31,17 +35,20 @@ export class FlightBoardComponent {
     { key: 'takeoffAirport', type:'text' },
     { key: 'landingAirport', type:'text' }
   ];
-
+  
   matcher = new MyErrorStateMatcher();
 
-  constructor(private fb: FormBuilder, private flightService:FlightsService) { }
+  constructor(
+    private fb: FormBuilder,
+    private flightService: FlightsService,
+    private toastr: ToastrService) { }
   
   ngOnInit(): void { 
     this.arrangeFormFields();
   }
 
   arrangeFormFields() {
-    
+
     this.flightFormControl = this.fb.group({});
     
     this.flightFormFields.forEach(field => {
@@ -67,9 +74,15 @@ export class FlightBoardComponent {
 
   addFlight(flight:Flight) {
 
-    this.flightService.PostFlight(flight).subscribe(res => { });
+    this.flightService.PostFlight(flight)
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(res => { }, (err) => {
+
+        this.toastr.error(err.error);
+      });
     
   }
+
 
   updateFlight() {
     
@@ -82,6 +95,12 @@ export class FlightBoardComponent {
       this.addFlight(this.flightFormControl.value);
     }
     
+  }
+
+
+  ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
   }
   
 

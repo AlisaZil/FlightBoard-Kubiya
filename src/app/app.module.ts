@@ -16,6 +16,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { AsyncPipe } from '@angular/common';
 
 import { HttpClientModule } from '@angular/common/http';
+import { ToastrModule } from 'ngx-toastr';
 
 
 @NgModule({
@@ -36,7 +37,8 @@ import { HttpClientModule } from '@angular/common/http';
     MatAutocompleteModule,
     ReactiveFormsModule,
     AsyncPipe,
-    HttpClientModule
+    HttpClientModule,
+    ToastrModule.forRoot(),BrowserAnimationsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

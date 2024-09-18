@@ -1,4 +1,4 @@
-<form class="flight-form" [formGroup]="flightFormControl">
+<form class="flight-form" [formGroup]="flightFormControl" *ngIf="flightFormControl">
 
     <div class="header-section">
         <p>Create Form</p>
@@ -6,16 +6,19 @@
     </div>
 
     <div class="input-section">
-        <mat-form-field class="form-field" *ngFor="let item of flightFormControl.value | keyvalue">
-            <input type="email" matInput [formControlName]="item.key" [errorStateMatcher]="matcher"
-                [placeholder]="transformInputPlaceholder(item.key)">
-                <mat-error>Please enter a flight number!</mat-error>
-        </mat-form-field>
-    </div>
 
+        <mat-form-field class="form-field" *ngFor="let item of flightFormFields">
+
+            <mat-label>{{transformInputPlaceholder(item.key)}}</mat-label>
+            <input id="{{item.key}}" type="text" matInput [formControlName]="item.key"
+                [placeholder]="transformInputPlaceholder(item.key)">
+
+            <mat-error>Please enter flight number!</mat-error>
+        </mat-form-field>
+
+    </div>
 
     <div class="button-section">
-        <button class="submit-button">Create</button>
+        <button (click)="submitForm()" class="submit-button">Create</button>
     </div>
-
 </form>

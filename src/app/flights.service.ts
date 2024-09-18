@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
 import { Flight } from './interfaces';
@@ -8,7 +8,7 @@ import { Flight } from './interfaces';
 })
 export class FlightsService {
 
-  private flightsUrl = 'https://localhost:7051/api/Flights'; 
+  private flightsUrl = 'http://localhost:5044/api/Flights'; 
 
   constructor(private http: HttpClient) { }
 
@@ -33,7 +33,12 @@ export class FlightsService {
   //POST 
 
   PostFlight(flight: Flight) {
-    return this.http.post<Flight>(this.flightsUrl, flight);
+
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json'
+    });
+    
+    return this.http.post<Flight>(this.flightsUrl, JSON.stringify(flight), {headers});
   }
 
   //PUT

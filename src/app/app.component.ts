@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { FormControl } from '@angular/forms';
-import { map, Observable, startWith } from 'rxjs';
+import { FlightsService } from './flights.service';
+import { Flight } from './interfaces';
 
 @Component({
   selector: 'app-root',
@@ -8,4 +8,20 @@ import { map, Observable, startWith } from 'rxjs';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
+
+  public FlightList?: Flight[];
+  
+  constructor( private flightService:FlightsService) { }
+
+  ngOnInit(): void {
+
+    this.getAllFilghts();
+  }
+  
+  getAllFilghts() {
+    this.flightService.getFlights().subscribe(res => {
+      this.FlightList = res;
+    })
+  }
+  
 }

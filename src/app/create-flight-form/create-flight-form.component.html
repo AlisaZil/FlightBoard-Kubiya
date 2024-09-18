@@ -1,1 +1,31 @@
-<p>create-flight-form works!</p>
+<form class="flight-form" [formGroup]="flightFormControl" *ngIf="flightFormControl">
+
+    <div class="header-section">
+        <p>{{formAction}} Form</p>
+        <img class="exit" src="../../assets/icons/exit.svg" alt="exit-icon">
+    </div>
+
+    <div class="input-section">
+
+        <mat-form-field class="form-field" *ngFor="let item of flightFormFields">
+
+            <mat-label>{{transformInputPlaceholder(item.key)}}</mat-label>
+
+            <ng-container *ngIf="item.type === 'dropdown'">
+                <select matNativeControl [formControlName]="item.key" name="food">
+                    <option *ngFor="let item of item.options" [value]="item">{{item}}</option>
+                </select>
+            </ng-container>
+
+            <input *ngIf="item.type!== 'dropdown'" [type]="item.type" [formControlName]="item.key" id="{{item.key}}"
+                type="text" matInput [placeholder]="transformInputPlaceholder(item.key)">
+
+            <mat-error>Please enter flight number!</mat-error>
+        </mat-form-field>
+
+    </div>
+
+    <div class="button-section">
+        <button (click)="submitForm()" class="submit-button">{{formAction}}</button>
+    </div>
+</form>

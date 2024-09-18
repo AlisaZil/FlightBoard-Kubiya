@@ -10,8 +10,18 @@
         <mat-form-field class="form-field" *ngFor="let item of flightFormFields">
 
             <mat-label>{{transformInputPlaceholder(item.key)}}</mat-label>
-            <input id="{{item.key}}" type="text" matInput [formControlName]="item.key"
-                [placeholder]="transformInputPlaceholder(item.key)">
+
+            <ng-container *ngIf="item.type === 'dropdown'">
+                <select matNativeControl  [formControlName]="item.key" name="food">
+                    <option *ngFor="let item of item.options" [value]="item">{{item}}</option>
+                </select>
+            </ng-container>
+
+            <input *ngIf="item.type!== 'dropdown'"
+            [type]="item.type"
+            [formControlName]="item.key"
+            id="{{item.key}}" type="text" matInput
+            [placeholder]="transformInputPlaceholder(item.key)">
 
             <mat-error>Please enter flight number!</mat-error>
         </mat-form-field>

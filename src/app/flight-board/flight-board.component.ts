@@ -21,13 +21,13 @@ export class FlightBoardComponent {
   // @Output() sendExit
 
   public flightFormControl?: FormGroup;
-  public flightFormFields: { key: string }[] = [
-    { key: 'FlightNumber' },
-    { key: 'Status' },
-    { key: 'TakeoffTime' },
-    { key: 'LandingTime' },
-    { key: 'TakeofAirport' },
-    { key: 'LandingAirport' }
+  public flightFormFields: { key: string, type:string, options?: string[] }[] = [
+    { key: 'FlightNumber', type:'number'},
+    { key: 'Status', type:'dropdown', options: ['Scheduled', 'Delayed', 'Cancelled'] },
+    { key: 'TakeoffTime', type:'time' },
+    { key: 'LandingTime', type:'time' },
+    { key: 'TakeofAirport', type:'text' },
+    { key: 'LandingAirport', type:'text' }
   ];
 
   matcher = new MyErrorStateMatcher();
@@ -42,7 +42,8 @@ export class FlightBoardComponent {
     this.flightFormControl = this.fb.group({});
     
     this.flightFormFields.forEach(field => {
-      this.flightFormControl?.addControl(field.key, this.fb.control('' ,field.key === "FlightNumber"? Validators.required: null));
+      this.flightFormControl?.addControl(field.key,
+        this.fb.control('', field.key === "FlightNumber" ? (Validators.required, Validators.pattern(/^[0-9]+$/)) : null));
     });
   }
 
@@ -54,8 +55,7 @@ export class FlightBoardComponent {
   }
 
   submitForm() {
-    console.log("Dddd");
-    
+
     console.log(this.flightFormControl?.value);
     
   }

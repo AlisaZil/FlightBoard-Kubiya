@@ -14,9 +14,9 @@ export class AppComponent {
   
   ngOnInit(): void {
 
-    this.flightService.getFlights().subscribe(res => {
-      console.log(res);
+    // this.flightService.getFlights().subscribe(res => {
+    //   console.log(res);
       
-    })
+    // })
   }
 }

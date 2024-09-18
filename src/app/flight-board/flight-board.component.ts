@@ -23,9 +23,11 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
 export class FlightBoardComponent implements OnDestroy{
   
   @Output() sendAction = new EventEmitter<string>();
-
+  
   private destroy$: Subject<void> = new Subject<void>();
   
+  public formAction: 'Edit' | 'Create' = 'Edit';
+
   public flightFormControl?: FormGroup;
   public flightFormFields: { key: string, type:string, options?: string[] }[] = [
     { key: 'flightNumber', type:'number'},
@@ -77,22 +79,32 @@ export class FlightBoardComponent implements OnDestroy{
     this.flightService.PostFlight(flight)
       .pipe(takeUntil(this.destroy$))
       .subscribe(res => { }, (err) => {
-
         this.toastr.error(err.error);
       });
     
   }
 
 
-  updateFlight() {
+  updateFlight(flight: Flight) {
+    
+    this.flightService.UpdateFlight(flight)
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(res => { }, (err) => {
+        this.toastr.error(err.error);
+      });
     
   }
 
   submitForm() {
 
     if (this.flightFormControl?.valid) {
+
       this.sendAction.emit("submit");
-      this.addFlight(this.flightFormControl.value);
+
+      this.formAction === 'Create' ? this.addFlight(this.flightFormControl.value) : this.updateFlight(this.flightFormControl.value);
+
+    } else {
+      this.toastr.error("please enter valid Flight Number");
     }
     
   }

@@ -1,7 +1,7 @@
 <form class="flight-form" [formGroup]="flightFormControl" *ngIf="flightFormControl">
 
     <div class="header-section">
-        <p>Create Form</p>
+        <p>{{formAction}} Form</p>
         <img class="exit" src="../../assets/icons/exit.svg" alt="exit-icon">
     </div>
 
@@ -29,6 +29,6 @@
     </div>
 
     <div class="button-section">
-        <button (click)="submitForm()" class="submit-button">Create</button>
+        <button (click)="submitForm()" class="submit-button">{{formAction}}</button>
     </div>
 </form>

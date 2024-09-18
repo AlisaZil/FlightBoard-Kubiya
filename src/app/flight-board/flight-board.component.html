@@ -1,8 +1,21 @@
 <form class="flight-form" [formGroup]="flightFormControl">
 
-    <mat-form-field *ngFor="let item of flightFormControl.value | keyvalue">
-        <input type="email" matInput [formControlName]="item.key" [errorStateMatcher]="matcher"
-            [placeholder]="transformInputPlaceholder(item.key)">
-    </mat-form-field>
+    <div class="header-section">
+        <p>Create Form</p>
+        <img class="exit" src="../../assets/icons/exit.svg" alt="exit-icon">
+    </div>
+
+    <div class="input-section">
+        <mat-form-field class="form-field" *ngFor="let item of flightFormControl.value | keyvalue">
+            <input type="email" matInput [formControlName]="item.key" [errorStateMatcher]="matcher"
+                [placeholder]="transformInputPlaceholder(item.key)">
+                <mat-error>Please enter a flight number!</mat-error>
+        </mat-form-field>
+    </div>
+
+
+    <div class="button-section">
+        <button class="submit-button">Create</button>
+    </div>
 
 </form>

@@ -1,6 +1,8 @@
-import { Component, Output } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, FormGroupDirective, NgForm, Validators } from '@angular/forms';
 import { ErrorStateMatcher } from '@angular/material/core';
+import { FlightsService } from '../flights.service';
+import { Flight } from '../interfaces';
 
 
 export class MyErrorStateMatcher implements ErrorStateMatcher {
@@ -18,45 +20,67 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
   
 export class FlightBoardComponent {
 
-  // @Output() sendExit
+  @Output() sendAction = new EventEmitter<string>();
 
   public flightFormControl?: FormGroup;
   public flightFormFields: { key: string, type:string, options?: string[] }[] = [
-    { key: 'FlightNumber', type:'number'},
-    { key: 'Status', type:'dropdown', options: ['Scheduled', 'Delayed', 'Cancelled'] },
-    { key: 'TakeoffTime', type:'time' },
-    { key: 'LandingTime', type:'time' },
-    { key: 'TakeofAirport', type:'text' },
-    { key: 'LandingAirport', type:'text' }
+    { key: 'flightNumber', type:'number'},
+    { key: 'status', type:'dropdown', options: ['Scheduled', 'Delayed', 'Cancelled'] },
+    { key: 'takeoffTime', type:'time' },
+    { key: 'landingTime', type:'time' },
+    { key: 'takeoffAirport', type:'text' },
+    { key: 'landingAirport', type:'text' }
   ];
 
   matcher = new MyErrorStateMatcher();
 
-  constructor(private fb: FormBuilder) { }
+  constructor(private fb: FormBuilder, private flightService:FlightsService) { }
   
   ngOnInit(): void { 
     this.arrangeFormFields();
   }
 
   arrangeFormFields() {
+    
     this.flightFormControl = this.fb.group({});
     
     this.flightFormFields.forEach(field => {
-      this.flightFormControl?.addControl(field.key,
-        this.fb.control('', field.key === "FlightNumber" ? (Validators.required, Validators.pattern(/^[0-9]+$/)) : null));
+
+      
+      if (field.key === "flightNumber") {
+        this.flightFormControl?.addControl(field.key, this.fb.control('', [Validators.required, Validators.pattern(/^[0-9]+$/)]));
+      }
+      
+      this.flightFormControl?.addControl(field.key, this.fb.control(''));
     });
+
   }
 
   transformInputPlaceholder(formControlName: string) {
 
-    let newPlaceholder = formControlName.match(/[A-Z][a-z]+/g);
-    return newPlaceholder ? newPlaceholder.join(" ") : 'Status';
+    let formattedKey = formControlName.replace(/([a-z])([A-Z])/g, '$1 $2');
+    formattedKey = formattedKey.replace(/\b\w/g, char => char.toUpperCase());
+    
+    return formattedKey;
+    
+  }
+
+  addFlight(flight:Flight) {
+
+    this.flightService.PostFlight(flight).subscribe(res => { });
+    
+  }
+
+  updateFlight() {
     
   }
 
   submitForm() {
 
-    console.log(this.flightFormControl?.value);
+    if (this.flightFormControl?.valid) {
+      this.sendAction.emit("submit");
+      this.addFlight(this.flightFormControl.value);
+    }
     
   }
   

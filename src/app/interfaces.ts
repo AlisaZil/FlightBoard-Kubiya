@@ -1,6 +1,6 @@
 export interface Flight{
 
-    airlineNumber: string,
+    flightNumber: string,
     status: string,
     takeOffTime: string,
     landingTime: string,

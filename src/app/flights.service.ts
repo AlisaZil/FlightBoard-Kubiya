@@ -10,7 +10,8 @@ export class FlightsService {
 
   private flightsUrl = 'http://localhost:5044/api/Flights'; 
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) { 
+  }
 
   //GET
   
@@ -19,7 +20,7 @@ export class FlightsService {
   }
 
   GetFlightsByFlightNumber(flightNumber: string): Observable<Flight[]>{
-    return this.http.get<Flight[]>(this.flightsUrl + '/GetFlightsByFlightNumber/' + flightNumber);
+    return this.http.get<Flight[]>(this.flightsUrl + '/GetFlightsByFlightNumber?flightNumber=' + flightNumber);
   }
 
   GetFlightsByAirport(Airport: string): Observable<Flight[]>{
@@ -50,6 +51,6 @@ export class FlightsService {
   //DELETE
 
   DeleteFlight(flightNumber: string) {
-    return this.http.delete<Flight>(this.flightsUrl + '/' + flightNumber);
+    return this.http.delete<Flight>(this.flightsUrl + '?flightNumber=' + flightNumber);
   }
 }

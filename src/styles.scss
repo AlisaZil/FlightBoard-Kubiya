@@ -20,3 +20,21 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
     left: 63%;
     transform: translate(-50%, -50%);
 }
+
+button{
+    width: fit-content;
+    height: 50px;
+    border-radius: 10px;
+    background-color: $mainColor;
+    color: white;
+    font-size: 20px;
+    cursor: pointer;
+    border: none;
+    
+    transition: 0.3s;
+    padding: 0 20px;
+}
+
+button:active{
+    transform: scale(0.98);
+}

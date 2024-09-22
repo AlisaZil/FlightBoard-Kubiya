@@ -6,23 +6,21 @@
     </div>
 
     <div class="dropdown-section">
+        <mat-form-field class="form-field landing-airport">
+            <mat-label>Landing Airport</mat-label>
+            <select matNativeControl>
+                <option>-</option>
+                <option *ngFor="let item of AirportList" [value]="item" (click)="sendLandingAirport.emit(item)">{{item}}</option>
+            </select>
+        </mat-form-field>
 
-            <mat-form-field >
-                <input type="text"  matInput [formControl]="takeOffAirport" [matAutocomplete]="auto" placeholder="Taking Off Airport">
-                <mat-autocomplete #auto="matAutocomplete">
-                    <mat-option *ngFor="let option of filterdTakingOffAirportList | async" [value]="option">
-                        {{option}}
-                    </mat-option>
-                </mat-autocomplete>
-            </mat-form-field>
+        <mat-form-field class="form-field takeoff-airport">
+            <mat-label>Takeoff Airport</mat-label>
+            <select matNativeControl>
+                <option>-</option>
+                <option *ngFor="let item of AirportList" [value]="item" (click)="sendTakeoffAirport.emit(item)">{{item}}</option>
+            </select>
+        </mat-form-field>
 
-            <mat-form-field>
-                <input type="text" matInput [formControl]="landingAirport" [matAutocomplete]="auto" placeholder="Landing Airport">
-                <mat-autocomplete #auto="matAutocomplete">
-                    <mat-option *ngFor="let option of filterdLandingAirportList | async" [value]="option">
-                        {{option}}
-                    </mat-option>
-                </mat-autocomplete>
-            </mat-form-field>
     </div>
 </div>

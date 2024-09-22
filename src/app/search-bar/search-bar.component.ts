@@ -9,15 +9,11 @@ import { filter, map, Observable, startWith } from 'rxjs';
 })
 export class SearchBarComponent {
 
-  public flightNumberInput: String = "";
+  public flightNumberInput: string = "";
   
-   public landingAirportList: string[] = ["BEN-GORION", "LONDON-AIR", "FRANCE-PARIS"];
-  public takingOffAirportList: string[] = ["BEN-GORION", "LONDON-AIR", "FRANCE-PARIS" , "FRANCE-PARIS"];
-
-  filterdLandingAirportList!: Observable<string[]>;
-  filterdTakingOffAirportList!: Observable<string[]>;
-
-  @Output() sendFlightNumberInput = new EventEmitter<String>();
+  public AirportList: string[] = ["BEN-GORION", "LONDON-AIR", "FRANCE-PARIS", "FRANCE-PARIS"];
+  
+  @Output() sendFlightNumberInput = new EventEmitter<string>();
   @Output() sendLandingAirport = new EventEmitter<string>();
   @Output() sendTakeoffAirport = new EventEmitter<string>();
 
@@ -25,12 +21,6 @@ export class SearchBarComponent {
   takeOffAirport = new FormControl();
 
   constructor() { }
-
-  ngOnInit() {
-
-    this.filterdLandingAirportList = this.filterList(this.landingAirportList, this.landingAirport);
-    this.filterdTakingOffAirportList = this.filterList(this.takingOffAirportList, this.takeOffAirport);
-  }
 
   filterList(list: string[], control: FormControl): Observable<string[]> {
     return control.valueChanges.pipe(
@@ -47,13 +37,13 @@ export class SearchBarComponent {
   }
 
 
-  getTakeoffAirportList() {
+  // getTakeoffAirportList() {
     
-  }
+  // }
 
-  getLandingAirportList() {
+  // getLandingAirportList() {
     
-  }
+  // }
 
   handleFlightNumberInput() {
     this.sendFlightNumberInput.emit(this.flightNumberInput);

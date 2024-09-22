@@ -1,9 +1,24 @@
-<!-- <flight-line [flightData]="
-{airlineNumber: '222343',
-    airlineName: 'EL AL ISRAEL AIRLINES',
-    status: 'DEPARTED',
-    takeOffTime: '12:10',
-    landingTime: '16:30',
-    takeofAirport: 'BEN-GORION',
-    landingAirport: 'MILAN'}">
-</flight-line> -->
+<div class="page">
+
+    <div class="header">
+        <p class="title">Flight Board</p>
+        <button class="create-flight-button" (click)="handleCreateFormClick()">Create Flight</button>
+    </div>
+
+    <search-bar 
+    class="search-bar" 
+    (sendFlightNumberInput)="filterListByFlightNumber($event)"
+    (sendLandingAirport)="filterListByLandingAirport($event)"
+    (sendTakeoffAirport)="filterListByTakeoffAirport($event)"></search-bar>
+
+    <div class="flight-board">
+        <flight-line (sendClick)="handleFlightLineClick($event)" [flightData]="flight" *ngFor="let flight of filteredFlightList"></flight-line>
+    </div>
+</div>
+
+<create-flight-form 
+(sendAction)="isCreateFormOpen=$event" 
+[openForm]="isCreateFormOpen" 
+[formAction]="currFormAction"
+[editFlightData]="editFlightData">
+</create-flight-form>

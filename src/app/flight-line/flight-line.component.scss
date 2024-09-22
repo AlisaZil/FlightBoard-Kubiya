@@ -7,13 +7,21 @@
     justify-content: space-around;
     border: solid 1px $mainColor;
 
-    width: 70%;
+    width: 100%;
     border-radius: 10px;
     height: 80px;
-    box-shadow: 0px 0px 8px 3px #00000030;
+    box-shadow: 0px 0px 8px 3px #0000001d;
 
     user-select: none;
     transition: 0.3s;
+    cursor: pointer;
+
+    margin: 10px 0;
+
+    .flight-number{
+        min-width: 150px;
+        max-width: 200px;
+    }
 
     p{
         font-size: 20px;
@@ -23,9 +31,14 @@
         display: flex;
         align-items: center;
         justify-content: center;
+        min-width: 200px;
 
         .airplane-icon{
             margin: 0 30px;
+        }
+
+        p{
+            margin: 0;
         }
     }
 
@@ -34,6 +47,7 @@
         display: flex;
         align-items: center;
         justify-content: center;
+        min-width: 300px;
 
         .airport-box{
             display: flex;
@@ -41,7 +55,9 @@
             justify-content: center;
             margin-right: 20px;
 
+
             .airport-name{
+                margin: 0;
                 margin-right: 15px;
             }
 

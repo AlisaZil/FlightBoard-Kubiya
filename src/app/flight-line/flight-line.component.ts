@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Flight } from '../interfaces';
 
 @Component({
@@ -10,6 +10,7 @@ import { Flight } from '../interfaces';
 export class FlightLineComponent {
 
   @Input() flightData: Flight | undefined;
+  @Output() sendClick = new EventEmitter<Flight>();
 
   constructor() { }
 
